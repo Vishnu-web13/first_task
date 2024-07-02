@@ -1,0 +1,25 @@
+body {
+  text-align: center;
+  color: white;
+  background-color: black;
+}
+.input1 {
+  color: aqua;
+}
+.input2 {
+  color: aqua;
+}
+.input3 {
+  color: aqua;
+}
+.input4 {
+  color: aqua;
+}
+h4 {
+  color: aqua;
+  text-align: center;
+}
+/* table{
+  border: 3px;
+  border-color: black;
+} */

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Task2</title>
+  </head>
+  
+    <table style="width: 100%;">
+      <thead>
+        <style>
+          table,
+          th,
+          td {
+            border: 1px solid;
+          }
+        </style>
+        <th>name</th>
+        <th>startDate</th>
+        <th>endDate</th>
+        <th>stateName</th>
+      </thead>
+      <tbody id="one" style="text-align: center;"></tbody>
+    </table>
+ 
+    <script>
+      // Replace 'your_api_url' with the actual URL of the API you want to fetch
+      const apiUrl =
+        "https://sportsal.com/app/api/v2/sports/cricket/tournament/all";
+
+      // Replace 'your_token' with the actual token you need to authenticate with
+      const token =
+        "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwczovL3Nwb3J0c2FsLmNvbSIsImF1ZCI6IkFQUCIsImlhdCI6MTcxNzQ4MTI3NywibmJmIjoxNzE3NDgxMjc3LCJleHAiOjE3MjU0MzAwNzcsInVzZXJJZCI6NzEsInVzZXJDb2RlIjoidXMtaUpRRFlua3RLVFFrUXNENnRzOEhHUyIsInVzZXJSb2xlIjoiUExBWUVSIn0.CP80nu8CHj7D7pBm3do87TwyLIpFVjOLcYfS_ymEdoQ";
+
+      // Make a GET request to the API endpoint with the token in the headers
+      fetch(apiUrl, {
+        method: "GET",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+        .then((response) => {
+          // Check if the response is successful (status code between 200 and 299)
+          if (response.ok) {
+            // Parse the JSON response
+            return response.json();
+          } else {
+            // If the response is not successful, throw an error with the status text
+            throw new Error("Failed to fetch data: " + response.statusText);
+          }
+        })
+        .then((data) => {
+          // Do something with the data
+          data.data.forEach((element, index) => {
+            console.log(element);
+            const newRow = document.createElement("tr");
+
+            const cell1 = document.createElement("td");
+            cell1.textContent = element.name;
+            newRow.appendChild(cell1);
+
+            const cell2 = document.createElement("td");
+            cell2.textContent = element.startDate;
+            newRow.appendChild(cell2);
+
+            const cell3 = document.createElement("td");
+            cell3.textContent = element.endDate;
+            newRow.appendChild(cell3);
+
+            const cell4 = document.createElement("td");
+            cell4.textContent = element.stateName;
+            newRow.appendChild(cell4);
+
+            document.getElementById("one").appendChild(newRow);
+          });
+        })
+        .catch((error) => {
+          // Handle any errors that occurred during the fetch
+          console.error("Error:", error);
+        });
+    </script>
+  </body>
+</html>
